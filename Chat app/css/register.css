@@ -1,0 +1,38 @@
+/* style cho register */
+/* để chắc chắn mình chỉnh css đúng: viết class của thẻ cha trước, class của con sau */
+.register-container {
+    height: 100vh;
+    display: flex;
+}
+.register-container .background-image {
+    width: 70%;
+    height: 100%;
+    background-size: cover;
+    background-image: url(../images/register-img.jpg);
+}
+.register-container .form-wrapper {
+    width: 30%;
+    height: 100%;
+}
+.register-container .register-header {
+    text-align: center;
+    font-size: 40px;
+    font-family: sans-serif;
+    margin: 40px 0 25px 0;
+    color: #757575;
+}
+.register-container #register-form {
+    padding: 0 20px;
+}
+.register-container .name-wrapper {
+    display: flex;
+    /* chỉnh cái trái cái phải */
+    justify-content: space-between;
+}
+.register-container .name-wrapper .input-wrapper {
+    width: 48%;
+}
+.register-container .register-form-action {
+    display: flex;
+    justify-content: space-between;
+}

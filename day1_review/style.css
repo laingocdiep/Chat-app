@@ -1,0 +1,24 @@
+.color-red {
+    color: red!important;
+}
+#color-gray {
+    color: gray!important;
+}
+/* hạn chế dùng important */
+ul li {
+    /* áp dụng cho những li là con trực tiếp của ul */
+    font-size: 30px;
+}
+h1:hover {
+    /* khi trỏ vào h1 thì size to hơn */
+    font-size: 50px;
+}
+body {
+    /* full screen */
+    width: 100vw;
+    height: 100vh;
+}
+/* padding-top = padding-bottom = 10px
+padding-left = padding-right = 5px
+có thể viết là 
+padding: 10px 5px; */

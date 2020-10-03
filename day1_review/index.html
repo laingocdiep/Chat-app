@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- rel: relationship -->
+</head>
+<body>
+    <!-- Cách viết nhanh 1 ul có 2 li: ul>li*2 -->
+    <h1 class="color-red">h1</h1>
+    <!-- Chọn id thay vì class vì id có nhiều điểm hơn
+    id = 100 điểm
+    class = 10 điểm
+    p, h1, a,... = 1 điểm
+    !important = +infinity, tức là nếu có important thì sẽ chọn luôn cái này, k cần tính điểm
+    nếu 2 cái = điểm nhau thì css chọn cái ở dưới
+    #Chỉ dùng important khi thật sự cần ưu tiên -->
+    <h2 class="color-red" id="color-gray">h2</h2>  
+    <h3 class="color-red">h3</h3>
+    <h4>h4</h4>
+    <h5>h5</h5>
+    <h6>h6</h6>
+
+    <ol>
+        <li>1.1</li>
+        <li>2.2</li>
+        <li>3.3</li>
+        <li>4.4</li>
+    </ol>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+
+    <span>display inline</span>
+    <span>display inline</span>
+    <span>display inline</span>
+    <!-- span display inline k có thuộc tính margin-top và margin-bottom, còn display inline block có đủ margin
+    Để k hiển thị:
+        display: none _thường dùng
+        visibility : 0 _ít dùng-->
+ 
+    <!-- Tìm game Flexbox Froggy để hiểu thêm về display: flex -->
+
+    <!-- khi click button thì ẩn 1 cái bất kì (ví dụ ẩn ul)-->
+    <button class="my-button">click</button>
+    
+    <script src="index.js"></script>
+</body>
+</html>

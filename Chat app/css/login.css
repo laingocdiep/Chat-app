@@ -1,0 +1,28 @@
+.login-container {
+    height: 100vh;
+    display: flex;
+}
+.login-container .login-background-image{
+    height: 100%;
+    width: 70%;
+    background-image: url(../images/login-img.jpg);
+    background-size: cover;   
+}
+.login-container .login-form-wrapper {
+    width: 30%;
+    height: 100%;
+}
+.login-container .login-header {
+    text-align: center;
+    font-size: 40px;
+    font-family: sans-serif;
+    margin: 40px 0 25px 0;
+    color: #757575;
+}
+.login-container #login-form {
+    padding: 0 20px;
+}
+.login-container .login-form-action {
+    display: flex;
+    justify-content: space-between;
+}
