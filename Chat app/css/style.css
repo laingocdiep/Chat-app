@@ -25,3 +25,8 @@
 .cursor-pointer {
     cursor: pointer;
 }
+.err {
+    color: red;
+    font-size: smaller;
+    font-style: italic;
+}

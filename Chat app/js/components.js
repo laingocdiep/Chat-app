@@ -32,7 +32,7 @@ components.registerPage =
                 </div>
                 <div class="register-form-action">
                     <div>
-                        Already have an account? <span id="redirect-login" class="cursor-pointer" onclick="view.setActiveScreen('loginPage')">Login</span>
+                        Already have an account? <span id="redirect-login" class="cursor-pointer">Login</span>
                     </div>
                     <button type="submit" class="btn">Register</button>
                 </div>
@@ -46,16 +46,16 @@ components.loginPage =
             <div class="login-header">MindX Chat</div>
             <form id="login-form">
                 <div class="input-wrapper">
-                    <input type="email" name="email-input" placeholder="Email">
+                    <input type="email" name="email" placeholder="Email">
                     <div id="email-login-error" class="err"></div>
                 </div>
                 <div class="input-wrapper">
-                    <input type="password" name="password-input" placeholder="Password">
+                    <input type="password" name="password" placeholder="Password">
                     <div id="password-login-error" class="err"></div>
                 </div>
                 <div class="login-form-action">
                     <div>
-                        Don't have an account? <span id="redirect-register" class="cursor-pointer" onclick="view.setActiveScreen('registerPage')">Register</span>
+                        Don't have an account? <span id="redirect-register" class="cursor-pointer">Register</span>
                     </div>
                     <button type="submit" class="btn">Login</button>
                 </div>
