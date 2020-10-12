@@ -1,0 +1,71 @@
+.chat-container .header {
+    color: #ffffff;
+    background: #037BFE;
+    text-align: center;
+    height: 64px;
+    line-height: 64px;
+    font-size: 24px;
+    /* hoặc căn giữa = flex */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+.chat-container .conversation-title {
+    text-align: center;
+    height: 64px;
+    line-height: 64px;
+    font-size: 24px;
+    border-bottom: solid 1px #dbdbdb;
+}
+.chat-container .conversation-detail {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+/* set vị trí cố định cho detail và form, còn bao nhiêu height list lấy hết */
+.chat-container .list-messages {
+    flex-grow: 1;
+}
+#send-message-form {
+    padding: 15px;
+    position: relative;
+    padding: 22px 15px;
+    border-top: 1px solid #dbdbdb;
+}
+#send-message-form input {
+    border: none;
+    width: 100%;
+    outline: 0;
+}
+#send-message-form button {
+    position: absolute;
+    bottom: 14px;
+    right: 10px;
+}
+.chat-container {
+    height: 100vh;
+}
+.chat-container .main {
+    height: calc(100vh - 64px);
+}
+.list-messages .message .message-content {
+    /* background-color: #dbdbdb; */
+    background-color: grey;
+    padding: 10px;
+    border-radius: 8px;
+    /* giói hạn độ dài khung tin nhắn để nó k dài dằng dặc hết màn hình như thẻ p thông thường */
+    max-width: 45%;
+    /* để nó bao nguyên vùng có nội dung */
+    width: max-content;
+}
+.list-messages .message.message-mine {
+    display: flex;
+    justify-content: flex-end;
+}
+.list-messages .message.message-mine .message-content {
+    color: #fff;
+    background-color: #037BFE;
+}
+.list-messages {
+    padding: 10px;
+}

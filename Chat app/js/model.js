@@ -1,5 +1,6 @@
 // chứa trạng thái và tùy trạng thái sẽ hiển thị view và có hành động khác nhau
 const model = {};
+model.currentUser = {};
 model.register = async ({firstName, lastName, email, password}) => {
     try {
         // copy từ firebase rồi thêm async và await (async và await là 1 cặp)
@@ -10,6 +11,8 @@ model.register = async ({firstName, lastName, email, password}) => {
         });
         // send email verify
         firebase.auth().currentUser.sendEmailVerification();
+        alert('Register successfully! Please confirm your email');
+        view.setActiveScreen('loginPage');
     }
     catch(err) {
         console.log(err);
@@ -20,8 +23,13 @@ model.register = async ({firstName, lastName, email, password}) => {
 
 model.login = async ({email, password}) => {
     try {
-        await firebase.auth().signInWithEmailAndPassword(email, password);
-        alert('Login succesfully');
+        const response = await firebase.auth().signInWithEmailAndPassword(email, password);
+        // console.log(response);
+        // if (response.user.emailVerified) {
+        //     alert('Login succesfully');
+        // } else {
+        //     alert('Please verify email');
+        // }
     }
     catch(err) {
         alert(err.message);

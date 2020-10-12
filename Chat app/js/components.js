@@ -1,6 +1,6 @@
 //lưu trữ code html cho lúc cần dùng
 const components = {};
-// components.welcomPage = `<h3>Hello World</h3>`;
+components.welcomPage = `<h3>Hey guys! It's Taylor. Thank you so much for joining this show with me.</h3>`;
 components.registerPage = 
     `<div class="register-container">
         <div class="background-image"></div>
@@ -62,3 +62,25 @@ components.loginPage =
             </form>
         </div>
     </div>`;
+components.chatPage = 
+`<div class="chat-container">
+<div class="header">MindX Chat</div>
+<div class="main">
+    <div class="conversation-detail">
+        <div class="conversation-title">Sis</div>
+        <div class="list-messages">
+            <div class="message message-mine">
+                <div class="message-content">Hi Taylor</div>
+            </div>
+            <div class="message message-other">
+                <div class="owner">Taylor Swift</div>
+                <div class="message-content">How's it going?</div>
+            </div>
+        </div>
+        <form id="send-message-form">
+            <input type="text" placeholder="Type a message" name="message">
+            <button class="btn">Send</button>
+        </form>
+    </div>
+</div>
+</div>`

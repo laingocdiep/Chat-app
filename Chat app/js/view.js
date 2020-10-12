@@ -38,9 +38,47 @@ view.setActiveScreen = (screenName) => {
             console.log(dataLogin);
         });
             break;
+        case 'chatPage':
+            document.getElementById('app').innerHTML = components.chatPage;
+            const sendMessageForm = document.getElementById('send-message-form');
+            sendMessageForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const message = sendMessageForm.message.value;
+                sendMessageForm.message.value = '';
+                console.log(message);
+                const messageSend = {
+                    owner: model.currentUser.email,
+                    content: message,
+                };
+                view.addMessage(messageSend);
+                
+                const messageReceive = {
+                    owner: 'Taylor Swift',
+                    content: "I can't wait to see you"
+                };
+
+                view.addMessage(messageReceive);
+            });
+            break;
     }
 }
 
 view.setErrorMessage = (elementId, message) => {
     document.getElementById(elementId).innerText = message;
+}
+
+view.addMessage = (message) => {
+    const messageWrapper = document.createElement('div');    // messageWrapper = <div></div>
+    messageWrapper.classList.add('message');      // messageWrapper = <div class="message"></div>
+    if (model.currentUser.email === message.owner) {
+        messageWrapper.classList.add('message-mine');
+        messageWrapper.innerHTML = `<div class="message-content">${message.content}</div>`
+    }
+    else {
+        messageWrapper.classList.add('message-other');
+        messageWrapper.innerHTML =
+        `<div class="owner">${message.owner}</div>
+        <div class="message-content">${message.content}</div>`;  
+    }
+    document.querySelector('.list-messages').appendChild(messageWrapper);
 }
