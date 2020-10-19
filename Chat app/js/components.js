@@ -69,13 +69,7 @@ components.chatPage =
     <div class="conversation-detail">
         <div class="conversation-title">Sis</div>
         <div class="list-messages">
-            <div class="message message-mine">
-                <div class="message-content">Hi Taylor</div>
-            </div>
-            <div class="message message-other">
-                <div class="owner">Taylor Swift</div>
-                <div class="message-content">How's it going?</div>
-            </div>
+            
         </div>
         <form id="send-message-form">
             <input type="text" placeholder="Type a message" name="message">

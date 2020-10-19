@@ -44,21 +44,30 @@ view.setActiveScreen = (screenName) => {
             sendMessageForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const message = sendMessageForm.message.value;
-                sendMessageForm.message.value = '';
                 console.log(message);
                 const messageSend = {
                     owner: model.currentUser.email,
                     content: message,
+                    createdAt: new Date().toISOString()
                 };
-                view.addMessage(messageSend);
                 
-                const messageReceive = {
-                    owner: 'Taylor Swift',
-                    content: "I can't wait to see you"
-                };
+                // const messageReceive = {
+                //     owner: 'Taylor Swift',
+                //     content: "I can't wait to see you"
+                // };
+                
+                if (message.trim() !== '') {
+                    view.addMessage(messageSend);
+                    model.addMessage(messageSend);
+                    // view.addMessage(messageReceive);
+                    sendMessageForm.message.value = '';
+                }
 
-                view.addMessage(messageReceive);
             });
+            // pull conversations
+            model.getConversations();
+            // listen to conversation's change
+            model.listenConversationChange();
             break;
     }
 }
@@ -81,4 +90,13 @@ view.addMessage = (message) => {
         <div class="message-content">${message.content}</div>`;  
     }
     document.querySelector('.list-messages').appendChild(messageWrapper);
+}
+
+view.showCurrentConversation = () => {
+    document.querySelector('.list-messages').innerHTML = '';
+    document.querySelector('.conversation-title').innerHTML = model.currentConversation.title;
+    // return docs.messages.map(view.addMessage)
+    for (const oneMessage of model.currentConversation.messages) {
+        view.addMessage(oneMessage);
+    }
 }

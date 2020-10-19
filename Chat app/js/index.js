@@ -34,8 +34,61 @@ const init = () => {
             view.setActiveScreen('registerPage');
         }
     });
+    // firestoreQueries();
 }
+
 // muốn đăng xuất (quay lại trang đăng nhập/ đăng kí): F12, vào console log, nhập firebase.auth().signOut(), enter
 
 // khi trình duyệt load xong
 window.onload = init;
+// firestoreQueries = async () => {
+    // get one doc
+    // const response = await firebase.firestore().collection('users').doc('qDRPG7zjo9wtpD1ytqig').get();
+    // const user = getDataFromDoc(response);
+    // console.log(user);
+
+    // get many docs
+    // const response = await firebase.firestore().collection('users').where('address', '==', 'TQ').get();
+    // const response = await firebase.firestore().collection('users').where('phones', 'array-contains', '01312').get();
+    // const response = await firebase.firestore().collection('users').get();
+    // response trả về 1 object gồm rất nhiều thứ, trong đó có docs là 1 mảng chứa các doc
+    // const users = getDataFromDocs(response.docs);
+    // console.log(users);
+
+    // add new doc
+    // const dataToAdd = {
+    //     name: 'Joe Alwyn',
+    //     age: 29
+    // }
+    // firebase.firestore().collection('users').add(dataToAdd);
+
+    // update doc
+    // const dataToUpdate = {
+    //     name: 'Doris',
+    //     address: 'TQ',
+    //     phones: firebase.firestore.FieldValue.arrayUnion('0912')
+    // }
+    // const docID = 'O1xtG8uuCaduD9PO5v7v';
+    // firebase.firestore().collection('users').doc(docID).update(dataToUpdate);
+
+    // delete doc
+    // const docID = 'g5367VPcxAvHQE0ucT3R';
+    // firebase.firestore().collection('users').doc(docID).delete();
+// }
+// }
+    getDataFromDoc = (res) => {
+        const data = res.data();
+        data.id = res.id;
+        return data;
+    }
+    
+    getDataFromDocs = (docs) => {
+        const arr = [];
+        for (const oneDoc of docs) {
+            arr.push(getDataFromDoc(oneDoc));
+        }
+        return arr;
+    
+        // map lọc từng phần tử của docs và cho vào getDataFromDoc, bên trong map là function, k phải lời gọi function
+    //     return docs.map(getDataFromDoc);
+    }

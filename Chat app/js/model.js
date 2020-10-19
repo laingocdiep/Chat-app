@@ -1,6 +1,8 @@
 // chứa trạng thái và tùy trạng thái sẽ hiển thị view và có hành động khác nhau
 const model = {};
 model.currentUser = {};
+model.conversations = {};
+model.currentConversation = {};
 model.register = async ({firstName, lastName, email, password}) => {
     try {
         // copy từ firebase rồi thêm async và await (async và await là 1 cặp)
@@ -34,4 +36,51 @@ model.login = async ({email, password}) => {
     catch(err) {
         alert(err.message);
     }
+}
+
+model.addMessage = (message) => {
+    const docID = 'yDYa3bwPt1Vr3BOspQPU';
+    const dataToUpdate = {
+        messages: firebase.firestore.FieldValue.arrayUnion(message)
+    }
+    firebase.firestore().collection('conversations').doc(docID).update(dataToUpdate);
+}
+
+model.getConversations = async () => {
+    const response = await firebase.firestore().collection('conversations').where('users', 'array-contains', model.currentUser.email).get();
+    console.log(getDataFromDocs(response.docs));
+    model.conversations = getDataFromDocs(response.docs);
+    if (model.conversations.length > 0) {
+        model.currentConversation = model.conversations[0];
+        view.showCurrentConversation(model.conversations[0]);
+    }
+}
+
+model.listenConversationChange = () => {
+    let isFirstRun = true;
+    // like addEventListener
+    firebase.firestore().collection('conversations').where('users', 'array-contains', model.currentUser.email).onSnapshot((snapshot) => {
+        // skip the first run
+        if (isFirstRun) {
+            isFirstRun = false;
+            return;
+        }
+        const docChanges = snapshot.docChanges();
+        for (const oneChange of docChanges) {
+            if (oneChange.type === 'modified') {
+                const dataChange = getDataFromDoc(oneChange.doc);
+                for (let i = 0; i < model.conversations.length; i++) {
+                    if (model.conversations[i].id === dataChange.id) {
+                        model.conversations[i] = dataChange;
+                    }
+                if (dataChange.id === model.currentConversation.id) {
+                    model.currentConversation = dataChange;
+                    // view.showCurrentConversation();
+                    view.addMessage(model.currentConversation.messages[model.currentConversation.messages.length - 1]);
+                }
+                
+                }
+            }
+        }
+    });
 }
