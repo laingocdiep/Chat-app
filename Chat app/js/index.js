@@ -92,3 +92,4 @@ window.onload = init;
         // map lọc từng phần tử của docs và cho vào getDataFromDoc, bên trong map là function, k phải lời gọi function
     //     return docs.map(getDataFromDoc);
     }
+

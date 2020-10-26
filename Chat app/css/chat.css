@@ -1,26 +1,16 @@
-.chat-container .header {
-    color: #ffffff;
-    background: #037BFE;
-    text-align: center;
-    height: 64px;
-    line-height: 64px;
-    font-size: 24px;
-    /* hoặc căn giữa = flex */
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-}
 .chat-container .conversation-title {
     text-align: center;
     height: 64px;
     line-height: 64px;
     font-size: 24px;
-    border-bottom: solid 1px #dbdbdb;
+    /* border-bottom: solid 1px #dbdbdb; */
+    border-bottom: solid 1px rgb(202, 201, 201);
 }
 .chat-container .conversation-detail {
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: 85%;
 }
 /* set vị trí cố định cho detail và form, còn bao nhiêu height list lấy hết */
 .chat-container .list-messages {
@@ -30,7 +20,8 @@
     padding: 15px;
     position: relative;
     padding: 22px 15px;
-    border-top: 1px solid #dbdbdb;
+    /* border-top: 1px solid #dbdbdb; */
+    border-top: 1px solid rgb(202, 201, 201);
 }
 #send-message-form input {
     border: none;
@@ -47,16 +38,18 @@
 }
 .chat-container .main {
     height: calc(100vh - 64px);
+    display: flex;
 }
 .list-messages .message .message-content {
     /* background-color: #dbdbdb; */
-    background-color: grey;
+    background-color: rgb(202, 201, 201);
     padding: 10px;
     border-radius: 8px;
     /* giói hạn độ dài khung tin nhắn để nó k dài dằng dặc hết màn hình như thẻ p thông thường */
     max-width: 45%;
     /* để nó bao nguyên vùng có nội dung */
     width: max-content;
+    word-break: break-all;
 }
 .list-messages .message.message-mine {
     display: flex;
@@ -71,4 +64,25 @@
     padding: 10px;
     flex-grow: 1;
     overflow-y: auto;
+}
+.chat-container .aside-left {
+    width: 15%;
+    height: 100%;
+    /* border-right: 1px solid #dbdbdb; */
+    border-right: 1px solid rgb(202, 201, 201);
+}
+.chat-container .aside-left .create-conversation {
+    height: 64px;
+    line-height: 64px;
+    text-align: center;
+    /* border-bottom: 1px solid #dbdbdb; */
+    border-bottom: 1px solid rgb(202, 201, 201);
+}
+.chat-container .aside-left .conversation {
+    padding: 10px;
+    cursor: pointer;
+}
+.chat-container .conversation.current {
+    /* background-color: #dbdbdb; */
+    background-color: rgb(202, 201, 201);
 }

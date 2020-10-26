@@ -29,7 +29,69 @@
         }
     }  -->
     <!-- Trong CSS, class đồng cấp thì viết liền kiểu .a.b, còn class cha con thì viết cách kiểu .a .b -->
+    <!-- Các button trong form đều xảy ra sự kiện submit form -->
 
-    
+    <div class="chat-container">
+        <div class="header">MindX chat</div>
+        <div class="main">
+          <div class="aside-left">
+              <div class="create-conversation">
+                  <button class="btn cursor-pointer" id="new-conversation">+ New conversation</button>
+              </div>
+              <div class="list-conversations">
+                  <div class="conversation current">
+                      <div class="left-conversation-title">
+                          Sis
+                      </div>
+                      <div class="num-of-user">
+                          2 users
+                      </div>
+                  </div>
+                  <div class="conversation">
+                      <div class="left-conversation-title">
+                          folklore
+                      </div>
+                      <div class="num-of-user">
+                          7 users
+                      </div>
+                  </div>
+                  <div class="conversation">
+                      <div class="left-conversation-title">
+                          reputation
+                      </div>
+                      <div class="num-of-user">
+                          6 users
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="conversation-detail">
+            <div class="conversation-title">Sis</div>
+            <div class="list-messages">
+              <div class="message message-mine">
+                <div class="message-content">Hello</div>
+              </div>
+              <div class="message message-other">
+                <div class="owner">Taylor Swift</div>
+                <div class="message-content">Hi</div>
+              </div>
+            </div>
+            <form id="send-message-form">
+              <input type="text" placeholder="Type a message" name="message">
+              <button class="btn">Send</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    <div class="new-conversation">
+        <div class="title">Create a new conversation</div>
+        <form id="add-new-conversation">
+            <input type="text" name="conversation-name" id="conversation-name" placeholder="Conversation name">
+            <input type="email" name="friend-email" id="friend-email" placeholder="Friend email">
+            <button type="submit">Save</button>
+            <button>Cancel</button>
+        </form>
+    </div>
 </body>
 </html>

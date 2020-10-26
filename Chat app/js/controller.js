@@ -65,3 +65,29 @@ controller.login = ({email, password}) => {
         model.login(dataLogin);
     }
 }
+
+controller.createConversation = ({title, email}) => {
+    if (email === '') {
+        view.setErrorMessage('conversation-email-error', 'Please input your friend email');
+    }
+    else if (!validateEmail(email)) {
+        view.setErrorMessage('conversation-email-error', 'Invalid email');
+    }
+    else {
+        view.setErrorMessage('conversation-email-error', '');
+    }
+
+    const messageTitle = title === ''? 'Please input title' : '';
+    view.setErrorMessage('conversation-title-error', messageTitle);
+
+    if (title !== '' && email !== '') {
+        // model.addConversation({title: title, email: email}); 
+        model.addConversation({title, email});
+    }
+}
+
+
+function validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}

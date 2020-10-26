@@ -30,3 +30,22 @@
     font-size: smaller;
     font-style: italic;
 }
+.header {
+    color: #ffffff;
+    background: #037BFE;
+    text-align: center;
+    height: 64px;
+    line-height: 64px;
+    font-size: 24px;
+    /* hoặc căn giữa = flex */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+.mb-1 {
+    margin-bottom: 1rem;
+}
+.btn-light {
+    background-color: #fafafa;
+    color: #333;
+}
