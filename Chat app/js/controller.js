@@ -86,6 +86,25 @@ controller.createConversation = ({title, email}) => {
     }
 }
 
+controller.addEmail = ({email}) => {
+    if (email === '') {
+        view.setErrorMessage('add-email-error', 'Please input email');
+    }
+    else {
+        if (!validateEmail(email)) {
+            view.setErrorMessage('add-email-error', 'Invalid email');    
+        }
+        else {
+            if (model.currentConversation.users.includes(email)) {
+                view.setErrorMessage('add-email-error', 'This email is currently in chat');
+            }
+            else {
+                view.setErrorMessage('add-email-error', '');
+                model.addEmail(email);
+            }   
+        }
+    }
+}
 
 function validateEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

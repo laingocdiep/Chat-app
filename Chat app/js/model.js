@@ -55,6 +55,7 @@ model.getConversations = async () => {
         model.currentConversation = model.conversations[0];
         view.showCurrentConversation();
         view.showListConversation();
+        view.showListUsers();
     }
     console.log(model.conversations);
 }
@@ -102,4 +103,12 @@ model.addConversation = ({title, email}) => {
     }
     firebase.firestore().collection('conversations').add(dataToAdd);
     view.setActiveScreen('chatPage', true);
+}
+
+model.addEmail = (email) => {
+    const dataToUpdate = {
+        users: firebase.firestore.FieldValue.arrayUnion(email)
+    }
+    firebase.firestore().collection('conversations').doc(model.currentConversation.id).update(dataToUpdate);
+    view.showListUsers();
 }

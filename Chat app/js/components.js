@@ -84,6 +84,18 @@ components.chatPage =
             <button class="btn">Send</button>
         </form>
     </div>
+    <div class="aside-right">
+        <div class="list-users">
+        
+        </div>
+        <form id="add-email-form">
+            <div class="input-wrapper">
+                <input type="email" name="email" id="add-email" placeholder="Friend email">
+                <div class="err" id="add-email-error"></div>
+            </div>
+            <button type="submit" class="btn cursor-pointer" id="add">Add</button>
+        </form>
+    </div>
 </div>
 </div>`;
 components.createConversationScreen = 

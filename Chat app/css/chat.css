@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 85%;
+    width: 70%;
 }
 /* set vị trí cố định cho detail và form, còn bao nhiêu height list lấy hết */
 .chat-container .list-messages {
@@ -85,4 +85,19 @@
 .chat-container .conversation.current {
     /* background-color: #dbdbdb; */
     background-color: rgb(202, 201, 201);
+}
+.aside-right {
+    width: 15%;
+    height: 100%;
+    border-left: 1px solid rgb(202, 201, 201);
+    justify-content: flex-end;
+}
+.aside-right .list-users {
+    border-bottom: 1px solid rgb(202, 201, 201);
+}
+.aside-right .list-users .user {
+    margin: 5px;
+}
+#add-email-form {
+    margin: 5px;
 }

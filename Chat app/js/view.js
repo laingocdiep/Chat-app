@@ -57,6 +57,15 @@ view.setActiveScreen = (screenName, fromCreate = false) => {
                     sendMessageForm.message.value = '';
                 }
             });
+            const addEmailForm = document.getElementById('add-email-form');
+            addEmailForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const data = {
+                    email: addEmailForm.email.value
+                }
+                controller.addEmail(data);
+                document.getElementById('add-email').innerHTML = '';
+            })
             if (!fromCreate) {
                 // pull conversations
                 model.getConversations();
@@ -66,10 +75,12 @@ view.setActiveScreen = (screenName, fromCreate = false) => {
             else {
                 view.showCurrentConversation();
                 view.showListConversation();
+                view.showListUsers();
             }
             document.querySelector('.create-conversation button').addEventListener('click', () => {
                 view.setActiveScreen('createConversationScreen');
             })
+
             break;
         case 'createConversationScreen':
             document.getElementById('app').innerHTML = components.createConversationScreen;
@@ -126,6 +137,22 @@ view.showListConversation = () => {
     }
 }
 
+view.showListUsers = () => {
+    view.addEmail();
+}
+
+view.addEmail = () => {
+    document.querySelector('.list-users').innerHTML = '';
+    const listUserWrapper =  document.createElement('div');
+    listUserWrapper.classList.add('list-user');
+    for (const user of model.currentConversation.users) {
+        listUserWrapper.innerHTML += `<div class="user">${user}</div>`;
+        console.log(user);
+    
+    }
+    document.querySelector('.list-users').appendChild(listUserWrapper);
+}
+
 view.addConversation = (conversation) => {
     // create div
     const conversationWrapper = document.createElement('div');
@@ -153,6 +180,7 @@ view.addConversation = (conversation) => {
             if (elm.id === conversation.id) {
                 model.currentConversation = elm;
                 view.showCurrentConversation();
+                view.showListUsers();
             }
         }
     });
