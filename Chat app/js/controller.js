@@ -86,7 +86,7 @@ controller.createConversation = ({title, email}) => {
     }
 }
 
-controller.addEmail = ({email}) => {
+controller.addUser = (email) => {
     if (email === '') {
         view.setErrorMessage('add-email-error', 'Please input email');
     }

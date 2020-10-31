@@ -85,12 +85,12 @@ components.chatPage =
         </form>
     </div>
     <div class="aside-right">
-        <div class="list-users">
+        <div class="list-users mb-1">
         
         </div>
-        <form id="add-email-form">
+        <form id="add-user-form">
             <div class="input-wrapper">
-                <input type="email" name="email" id="add-email" placeholder="Friend email">
+                <input type="email" name="email" id="add-user" placeholder="Input friend email">
                 <div class="err" id="add-email-error"></div>
             </div>
             <button type="submit" class="btn cursor-pointer" id="add">Add</button>

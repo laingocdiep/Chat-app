@@ -55,7 +55,6 @@ model.getConversations = async () => {
         model.currentConversation = model.conversations[0];
         view.showCurrentConversation();
         view.showListConversation();
-        view.showListUsers();
     }
     console.log(model.conversations);
 }
@@ -80,9 +79,24 @@ model.listenConversationChange = () => {
                 }
                 if (dataChange.id === model.currentConversation.id) {
                     model.currentConversation = dataChange;
+                    if (model.currentConversation.users.length !== dataChange.users.length) {
+                        view.addUser(dataChange.users[dataChange.users.length - 1]);
+                    }
+                    else {
+                        const lastMessage = dataChange.messages[dataChange.messages.length - 1];
+                        if (lastMessage.owner !== model.currentUser.email) {
+                            view.showNotification(dataChange.id);
+                        }
+                        else {
+                            view.turnOffNotification(dataChange.id);
+                        }
+                        view.addMessage(model.currentConversation.messages[model.currentConversation.messages.length - 1]);
+                        view.scrollToEndElm();
+                    }
                     // view.showCurrentConversation();
-                    view.addMessage(model.currentConversation.messages[model.currentConversation.messages.length - 1]);
-                    view.scrollToEndElm();
+                }
+                else {
+                    view.showNotification(dataChange.id);
                 }
             }
             else if (oneChange.type === 'added') {
@@ -90,6 +104,8 @@ model.listenConversationChange = () => {
                 model.conversations.push(dataChange);
                 view.addConversation(dataChange);
             }
+            // const change = getDataFromDoc(oneChange.doc);
+            // view.showNotification(change.id);
         }
     });
 }
@@ -105,10 +121,9 @@ model.addConversation = ({title, email}) => {
     view.setActiveScreen('chatPage', true);
 }
 
-model.addEmail = (email) => {
+model.addUser = (email) => {
     const dataToUpdate = {
         users: firebase.firestore.FieldValue.arrayUnion(email)
     }
     firebase.firestore().collection('conversations').doc(model.currentConversation.id).update(dataToUpdate);
-    view.showListUsers();
 }

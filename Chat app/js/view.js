@@ -57,15 +57,6 @@ view.setActiveScreen = (screenName, fromCreate = false) => {
                     sendMessageForm.message.value = '';
                 }
             });
-            const addEmailForm = document.getElementById('add-email-form');
-            addEmailForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const data = {
-                    email: addEmailForm.email.value
-                }
-                controller.addEmail(data);
-                document.getElementById('add-email').innerHTML = '';
-            })
             if (!fromCreate) {
                 // pull conversations
                 model.getConversations();
@@ -75,10 +66,18 @@ view.setActiveScreen = (screenName, fromCreate = false) => {
             else {
                 view.showCurrentConversation();
                 view.showListConversation();
-                view.showListUsers();
             }
             document.querySelector('.create-conversation button').addEventListener('click', () => {
                 view.setActiveScreen('createConversationScreen');
+            })
+            const addUserForm = document.getElementById('add-user-form');
+            addUserForm.addEventListener('submit', (e) => {
+                e.preventDefault(); // k cho load lai trang (k gui data)
+                const email = addUserForm.email.value;
+                if (email !== '') {
+                    model.addUser(email);
+                }
+                addUserForm.email.value = '';
             })
 
             break;
@@ -97,7 +96,6 @@ view.setActiveScreen = (screenName, fromCreate = false) => {
                 controller.createConversation(data);
             })
             break;
-
     }
 }
 
@@ -123,12 +121,17 @@ view.addMessage = (message) => {
 
 view.showCurrentConversation = () => {
     document.querySelector('.list-messages').innerHTML = '';
+    document.querySelector('.list-users').innerHTML = '';
     document.querySelector('.conversation-title').innerHTML = model.currentConversation.title;
     // return docs.messages.map(view.addMessage)
     for (const oneMessage of model.currentConversation.messages) {
         view.addMessage(oneMessage);
     }
+    for (const user of model.currentConversation.users) {
+        view.addUser(user);
+    }
     view.scrollToEndElm();
+    
 }
 
 view.showListConversation = () => {
@@ -137,20 +140,11 @@ view.showListConversation = () => {
     }
 }
 
-view.showListUsers = () => {
-    view.addEmail();
-}
-
-view.addEmail = () => {
-    document.querySelector('.list-users').innerHTML = '';
-    const listUserWrapper =  document.createElement('div');
-    listUserWrapper.classList.add('list-user');
-    for (const user of model.currentConversation.users) {
-        listUserWrapper.innerHTML += `<div class="user">${user}</div>`;
-        console.log(user);
-    
-    }
-    document.querySelector('.list-users').appendChild(listUserWrapper);
+view.addUser = (user) => {
+    const userElement =  document.createElement('div');
+    userElement.classList.add('user');
+    userElement.innerText = user;
+    document.querySelector('.list-users').appendChild(userElement);
 }
 
 view.addConversation = (conversation) => {
@@ -158,13 +152,16 @@ view.addConversation = (conversation) => {
     const conversationWrapper = document.createElement('div');
     // add div
     conversationWrapper.classList.add('conversation');
+    conversationWrapper.id = conversation.id;
     if (conversation.id === model.currentConversation.id) {
         conversationWrapper.classList.add('current');
     }
     // update innerHTML
     conversationWrapper.innerHTML = 
     `<div class="left-conversation-title">${conversation.title}</div>
-    <div class="num-of-user">${conversation.users.length} users</div>`;
+    <div class="num-of-user">${conversation.users.length} users</div>
+    <div class="notification"></div>`;
+
     // add to interface
     document.querySelector('.list-conversations').appendChild(conversationWrapper);
     console.log(conversationWrapper);
@@ -180,7 +177,6 @@ view.addConversation = (conversation) => {
             if (elm.id === conversation.id) {
                 model.currentConversation = elm;
                 view.showCurrentConversation();
-                view.showListUsers();
             }
         }
     });
@@ -188,4 +184,16 @@ view.addConversation = (conversation) => {
 view.scrollToEndElm = () => {
     const elm = document.querySelector('.list-messages');
     elm.scrollTop = elm.scrollHeight;
+}
+
+view.showNotification = (id) => {
+    const conversationElement = document.getElementById(id)
+    console.log(conversationElement);
+    // conversationElement.lastElementChild.style = 'display: block';
+    conversationElement.querySelector('.notification').style = 'display: block';
+}
+
+view.turnOffNotification = (id) => {
+    const conversationElement = document.getElementById(id);
+    conversationElement.querySelector('.notification').style = 'display: none';
 }

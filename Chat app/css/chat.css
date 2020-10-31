@@ -3,8 +3,7 @@
     height: 64px;
     line-height: 64px;
     font-size: 24px;
-    /* border-bottom: solid 1px #dbdbdb; */
-    border-bottom: solid 1px rgb(202, 201, 201);
+    border-bottom: solid 1px#dbdbdb;
 }
 .chat-container .conversation-detail {
     display: flex;
@@ -20,8 +19,7 @@
     padding: 15px;
     position: relative;
     padding: 22px 15px;
-    /* border-top: 1px solid #dbdbdb; */
-    border-top: 1px solid rgb(202, 201, 201);
+    border-top: 1px solid#dbdbdb;
 }
 #send-message-form input {
     border: none;
@@ -41,8 +39,7 @@
     display: flex;
 }
 .list-messages .message .message-content {
-    /* background-color: #dbdbdb; */
-    background-color: rgb(202, 201, 201);
+    background-color:#dbdbdb;
     padding: 10px;
     border-radius: 8px;
     /* giói hạn độ dài khung tin nhắn để nó k dài dằng dặc hết màn hình như thẻ p thông thường */
@@ -68,36 +65,44 @@
 .chat-container .aside-left {
     width: 15%;
     height: 100%;
-    /* border-right: 1px solid #dbdbdb; */
-    border-right: 1px solid rgb(202, 201, 201);
+    border-right: 1px solid#dbdbdb;
 }
 .chat-container .aside-left .create-conversation {
     height: 64px;
     line-height: 64px;
     text-align: center;
-    /* border-bottom: 1px solid #dbdbdb; */
-    border-bottom: 1px solid rgb(202, 201, 201);
+    border-bottom: 1px solid#dbdbdb;
 }
 .chat-container .aside-left .conversation {
     padding: 10px;
     cursor: pointer;
+    position: relative;
 }
 .chat-container .conversation.current {
-    /* background-color: #dbdbdb; */
-    background-color: rgb(202, 201, 201);
-}
-.aside-right {
-    width: 15%;
-    height: 100%;
-    border-left: 1px solid rgb(202, 201, 201);
-    justify-content: flex-end;
+    background-color: #dbdbdb;
 }
 .aside-right .list-users {
-    border-bottom: 1px solid rgb(202, 201, 201);
+    border-bottom: 1px solid#dbdbdb;
 }
 .aside-right .list-users .user {
     margin: 5px;
 }
 #add-email-form {
     margin: 5px;
+}
+.chat-container .aside-right {
+    padding: 10px;
+    width: 15%;
+    border-left: solid 1px #dbdbdb;
+}
+.chat-container .notification {
+    width: 15px;
+    height: 15px;
+    background-color: #037BFE;
+    border-radius: 50%;
+    /* position absolute phu thuoc vi tri vao position relative */
+    position: absolute;   
+    right: 10px;
+    top: 22px;
+    display: none;
 }
