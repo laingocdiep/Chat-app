@@ -16,7 +16,7 @@ const init = () => {
     // nhớ trạng thái đăng nhập: khi đã login thì dù có F5 thì web vẫn giữ nguyên trang muốn hiển thị thay vì quay lại
     // trang đăng nhập/ đăng kí
     firebase.auth().onAuthStateChanged((res) => {
-        console.log(res);
+        // console.log(res);
         if (res) {
             if (res.emailVerified) {
                 model.currentUser = {

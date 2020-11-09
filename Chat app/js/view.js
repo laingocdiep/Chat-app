@@ -10,7 +10,7 @@ view.setActiveScreen = (screenName, fromCreate = false) => {
             document.getElementById('redirect-login').addEventListener('click', () => {view.setActiveScreen('loginPage')});
             const registerForm = document.getElementById('register-form');
             registerForm.addEventListener('submit', (event) => {
-                console.log(event);
+                // console.log(event);
             event.preventDefault();
             const dataRegister = {
                 firstName: registerForm.firstName.value,
@@ -20,7 +20,7 @@ view.setActiveScreen = (screenName, fromCreate = false) => {
                 confirmPassword: registerForm.confirmPassword.value,
             }
             controller.register(dataRegister);
-            console.log(dataRegister);
+            // console.log(dataRegister);
         });
             break;
         case 'loginPage':
@@ -28,14 +28,14 @@ view.setActiveScreen = (screenName, fromCreate = false) => {
             document.getElementById('redirect-register').addEventListener('click', () => {view.setActiveScreen('registerPage')});
             const loginForm = document.getElementById('login-form');
             loginForm.addEventListener('submit', (event) => {
-                console.log(event);
+                // console.log(event);
             event.preventDefault();
             const dataLogin = {
                 email: loginForm.email.value,
                 password: loginForm.password.value,
             }
             controller.login(dataLogin);
-            console.log(dataLogin);
+            // console.log(dataLogin);
         });
             break;
         case 'chatPage':
@@ -44,7 +44,7 @@ view.setActiveScreen = (screenName, fromCreate = false) => {
             sendMessageForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const message = sendMessageForm.message.value;
-                console.log(message);
+                // console.log(message);
                 const messageSend = {
                     owner: model.currentUser.email,
                     content: message,
@@ -79,7 +79,14 @@ view.setActiveScreen = (screenName, fromCreate = false) => {
                 }
                 addUserForm.email.value = '';
             })
-
+            document.querySelector('#send-message-form input').addEventListener('click', () => {
+                view.hideNotification(model.currentConversation.id);
+            })
+            const mediaQuery = window.matchMedia('screen and (max-width: 768px)');
+            console.log(mediaQuery);
+            if (mediaQuery.matches) {
+                document.querySelector('.create-conversation button').innerHTML = '<i class="fa fa-plus-circle" aria-hidden="true"></i>';
+            }
             break;
         case 'createConversationScreen':
             document.getElementById('app').innerHTML = components.createConversationScreen;
@@ -162,9 +169,29 @@ view.addConversation = (conversation) => {
     <div class="num-of-user">${conversation.users.length} users</div>
     <div class="notification"></div>`;
 
+    const mediaQuery = window.matchMedia('screen and (max-width: 768px)');
+    if (mediaQuery.matches) {
+        // 2 dòng này đều có thể dùng để lấy chữ cái đầu
+        // conversationWrapper.firstElementChild.innerHTML = conversation.title[0];
+        conversationWrapper.firstElementChild.innerHTML = conversation.title.charAt(0).toUpperCase();
+    }
+    mediaQuery.addListener(matches => {
+        console.log(matches);
+        if (matches.matches) {
+            // 2 dòng này đều có thể dùng để lấy chữ cái đầu
+            // conversationWrapper.firstElementChild.innerHTML = conversation.title[0];
+            conversationWrapper.firstElementChild.innerHTML = conversation.title.charAt(0).toUpperCase();
+            document.querySelector('.create-conversation button').innerHTML = '<i class="fa fa-plus-circle" aria-hidden="true"></i>';
+        }
+        else {
+            conversationWrapper.firstElementChild.innerHTML = conversation.title;
+            document.querySelector('.create-conversation button').innerHTML = '+New conversation';
+        }
+    })
+
     // add to interface
     document.querySelector('.list-conversations').appendChild(conversationWrapper);
-    console.log(conversationWrapper);
+    // console.log(conversationWrapper);
     conversationWrapper.addEventListener('click', () => {
         // delete old current class
         const current = document.querySelector('.current');
@@ -172,13 +199,14 @@ view.addConversation = (conversation) => {
         // add new current class which is clicked
         conversationWrapper.classList.add('current');
         // show clicked conversation on the screen
-        console.log(conversation.id);
+        // console.log(conversation.id);
         for (const elm of model.conversations) {
             if (elm.id === conversation.id) {
                 model.currentConversation = elm;
                 view.showCurrentConversation();
             }
         }
+        view.hideNotification(conversation.id);
     });
 }
 view.scrollToEndElm = () => {
@@ -193,7 +221,7 @@ view.showNotification = (id) => {
     conversationElement.querySelector('.notification').style = 'display: block';
 }
 
-view.turnOffNotification = (id) => {
+view.hideNotification = (id) => {
     const conversationElement = document.getElementById(id);
     conversationElement.querySelector('.notification').style = 'display: none';
 }

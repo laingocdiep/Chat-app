@@ -17,7 +17,7 @@ model.register = async ({firstName, lastName, email, password}) => {
         view.setActiveScreen('loginPage');
     }
     catch(err) {
-        console.log(err);
+        // console.log(err);
         alert(err.message);
     }
     
@@ -48,15 +48,15 @@ model.addMessage = (message) => {
 
 model.getConversations = async () => {
     const response = await firebase.firestore().collection('conversations').where('users', 'array-contains', model.currentUser.email).get();
-    console.log(response);
-    console.log(getDataFromDocs(response.docs));
+    // console.log(response);
+    // console.log(getDataFromDocs(response.docs));
     model.conversations = getDataFromDocs(response.docs);
     if (model.conversations.length > 0) {
         model.currentConversation = model.conversations[0];
         view.showCurrentConversation();
         view.showListConversation();
     }
-    console.log(model.conversations);
+    // console.log(model.conversations);
 }
 
 model.listenConversationChange = () => {
@@ -86,9 +86,6 @@ model.listenConversationChange = () => {
                         const lastMessage = dataChange.messages[dataChange.messages.length - 1];
                         if (lastMessage.owner !== model.currentUser.email) {
                             view.showNotification(dataChange.id);
-                        }
-                        else {
-                            view.turnOffNotification(dataChange.id);
                         }
                         view.addMessage(model.currentConversation.messages[model.currentConversation.messages.length - 1]);
                         view.scrollToEndElm();
